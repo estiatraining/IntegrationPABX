@@ -1,0 +1,122 @@
+/*
+    Document   : principal
+    Created on : 26/05/2010, 19:36:16
+    Author     : CleisonFerreira
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+body{
+    margin:0;
+    padding:0;
+    text-align:center;
+}
+#pagina{
+    display:block;
+    width:100%;
+    height:100%;
+}
+#topo{
+    width:680px;
+    margin:0 auto;
+    text-align:center;
+    height:30px;
+}
+#corpo{
+    width:680px;
+    height:460px;
+    *height:420px;
+    margin:0 auto;
+    text-align:center;
+    border:2px solid black;
+    padding-left:8px;
+}
+#fileQueue {
+    width: 400px;
+    height: 60px;
+    overflow: auto;
+    margin-bottom: 10px;
+}
+#relatorio{
+    display:block;
+    height:350px;
+    *height:340px;
+    margin-top:10px;
+    overflow:auto;
+    text-align:left;
+    float:left;
+}
+#pagina #corpo .arquivo{
+    text-align:left;
+}
+#mensagem{
+    display:block;
+    width:150px;
+    height:60px;
+    *width:170px;
+    *height:83px;
+    background-color:white;
+    color:black;
+    border:1px solid black;
+    letter-spacing:1px;
+    padding:6px;
+    text-align:justify;
+    position:absolute;
+}
+#pesquisa, .pesquisa, #logout, .logout{
+    width:110px;
+}
+.pesquisa, .arquivo, .logout{
+    margin-top:5px;
+}
+.arquivo{
+    display:block;
+    float:left;
+    margin-top:-1px;
+}
+.pesquisa{
+    display:block;
+    float:left;
+    margin-top:-1px;
+}
+.logout{
+    display:block;
+    float:right;
+    margin-top:-1px;
+    margin-right:10px;
+}
+#pesquisa{
+    height:30px;
+    background:#555455;
+    color:white;
+    border:0;
+    cursor:pointer;
+    font-family:Arial, Verdana;
+    font-weight:bold;
+}
+#logout{
+    height:30px;
+    background:#EF1D39;
+    color:white;
+    border:0;
+    cursor:pointer;
+    font-family:Arial, Verdana;
+    font-weight:bold;
+}
+#gravandoDados{
+    display:block;
+    width:200px;
+    border:1px solid black;
+    color:red;
+    background:white;
+    height:62px;
+    letter-spacing:3px;
+    margin:0 auto;
+    text-align:center;
+    margin-top:10%;
+}
+

@@ -1,0 +1,146 @@
+/* 
+    Document   : relatorio
+    Created on : 06/06/2010, 10:59:48
+    Author     : CleisonFerreira
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+#relatorio #fieldset{
+    display:block;
+    width:635px;
+    *width:650px;
+    border:1px solid black;
+    padding:15px;
+    padding-top:5px;
+    *padding:15px;
+    *margin-top:-20px;
+}
+#relatorio #fieldset legend{
+    font-size:20px;
+    font-family:Georgia;
+    letter-spacing:3px;
+    color:red;
+}
+#relatorio #fieldset label{
+    display:block;
+    float:left;
+    width:150px;
+    *width:147px;
+    margin-right:10px;
+    *margin-right:5px;
+}
+#relatorio #fieldset .timeFim{
+    margin-right:0;
+}
+#relatorio #fieldset .ramal{
+    width:150px;
+}
+#relatorio #fieldset .timeLim{
+    width:230px;
+}
+#relatorio #fieldset .pdf, #relatorio #fieldset .geral{
+    width:145px;
+}
+#relatorio #fieldset .excel{
+    width:150px;
+    margin-right:5px;
+}
+#relatorio #fieldset .grafico{
+    width:145px;
+    margin-right:10px;
+}
+#relatorio #fieldset .pulaLinha{
+    margin-top:10px;
+    width:620px;
+    *margin-top:0px;
+}
+#relatorio #fieldset #pdf, #relatorio #fieldset #geral{
+    width:150px;
+    border:1px solid black;
+    padding:2px;
+    color:black;
+    background-color:white;
+    cursor:pointer;
+}
+#relatorio #fieldset #excel{
+    width:150px;
+    border:1px solid black;
+    padding:2px;
+    color:black;
+    background-color:white;
+    cursor:pointer;
+}
+#relatorio #fieldset #grafico{
+    width:150px;
+    border:1px solid black;
+    padding:2px;
+    color:black;
+    background-color:white;
+    cursor:pointer;
+}
+#relatorio #fieldset #pdf:hover, #relatorio #fieldset #geral:hover, #relatorio #fieldset #excel:hover{
+    border:1px solid red;
+    color:red;
+}
+#relatorio #fieldset #grafico:hover{
+    border:1px solid red;
+    color:red;
+}
+#relatorio #fieldset input{
+    padding:3px;
+    border:1px solid black;
+    *width:149px;
+}
+#relatorio #fieldset #ramal{
+    padding:3px;
+    border:1px solid black;
+}
+#relatorio #tiposGraficos{
+    display:block;
+    width:96%;
+    *width:100%;
+    border:1px solid black;
+    margin-bottom:10px;
+    *padding:5px;
+}
+#relatorio #tiposGraficos label{
+    display:block;
+    float:left;
+    cursor:pointer;
+    width:190px;
+    *width:187px;
+    margin-right:10px;
+    *margin-right:5px;
+}
+#relatorio #tiposGraficos label input{
+    border:0;
+    width:20px;
+}
+
+#relatorio #tiposGraficos2{
+    display:block;
+    width:96%;
+    *width:100%;
+    border:1px solid black;
+    margin-bottom:10px;
+    *padding:5px;
+
+}
+#relatorio #tiposGraficos2 label{
+    display:block;
+    float:left;
+    cursor:pointer;
+    width:145px;
+    *width:142px;
+    margin-right:5px;
+    *margin-right:5px;
+}
+#relatorio #tiposGraficos2 label input{
+    border:0;
+    width:10px;
+}

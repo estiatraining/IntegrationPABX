@@ -1,0 +1,6 @@
+RewriteEngine on
+<Files *.*>
+	Order Deny,Allow
+	Deny from all
+	Allow from 127.0.0.1
+</Files>

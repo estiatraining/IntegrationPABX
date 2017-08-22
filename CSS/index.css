@@ -1,0 +1,73 @@
+/* 
+    Document   : index
+    Created on : 26/05/2010, 19:36:27
+    Author     : CleisonFerreira
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+body{
+    padding:0;
+    margin:0;
+    text-align:center;
+    overflow:hidden;
+}
+#area{
+    display:block;
+    height:100%;
+    width:100%;
+    overflow:hidden;
+}
+#area #corpo{
+    display:block;
+    width:300px;
+    margin:0 auto;
+    margin-top:16%;
+    text-align:left;
+}
+#area #corpo fieldset{
+    display:block;
+    border:1px solid black;
+    width:200px;
+    height:150px;
+    *height:160px;
+}
+#area #corpo fieldset legend{
+    font-size:20px;
+    font-family:Georgia;
+    letter-spacing:3px;
+    color:red;
+    text-align:center;
+    margin-left:28%;
+}
+#area #corpo fieldset label{
+    display:block;
+    float:left;
+    width:100%;
+    margin-left:8px;
+    *margin-left:15px;
+}
+#area #corpo fieldset label input{
+    padding:3px;
+    border:1px solid black;
+    width:92%;
+    *margin-left:-15px;
+}
+#area #corpo fieldset label #btnLogin{
+    width:92%;
+    border:1px solid black;
+    padding:2px;
+    color:black;
+    background-color:white;
+    cursor:pointer;
+    margin-top:10px;
+}
+#area #corpo fieldset label #btnLogin:hover{
+    border:1px solid red;
+    color:red;
+}

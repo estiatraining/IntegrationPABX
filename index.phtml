@@ -1,0 +1,95 @@
+<?php
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ * Description of index.phtml
+ *
+ * @author CleisonFerreira
+ * @
+ */
+    ini_set("display_errors","on");
+    include_once $_SERVER[ 'DOCUMENT_ROOT' ]."/System/Utilitarios/LoadClass.class.php";
+    $__autoload = new LoadClass();
+    $__autoload->carregar('UsuarioNegocios');
+    $UsuarioNegocios = new UsuarioNegocios();
+    $UsuarioNegocios->startSessao();
+    $UsuarioNegocios->destroySessao("Log_Deus_Conosco");
+?>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title></title>
+        <link rel="stylesheet" type="text/css" href="CSS/index.css" />
+        <script type="text/javascript" src="JScript/jquery.js" ></script>
+        <script>
+            $(document).ready( function() {
+                $("#logim").focus();
+                validar = function(){
+                    if(jQuery.trim(document.formulario.logim.value) == ""){
+                        alert("Digite o login!");
+                        $("#logim").focus();
+                    }
+                    else if(jQuery.trim(document.formulario.senha.value) == ""){
+                        alert("Digite a senha!");
+                        $("#senha").focus();
+                    }
+                    else{
+                        document.formulario.action = "/System/Facade/UsuarioFacade.php";
+                        document.formulario.submit();
+                    }
+                }
+                $("#btnLogin").click( function() {
+                    if(jQuery.trim(document.formulario.logim.value) == ""){
+                        alert("Digite o login!");
+                        $("#logim").focus();
+                    }
+                    else if(jQuery.trim(document.formulario.senha.value) == ""){
+                        alert("Digite a senha!");
+                        $("#senha").focus();
+                    }
+                    else{
+                        document.formulario.action = "/System/Facade/UsuarioFacade.php";
+                        document.formulario.submit();
+                    }
+                });
+            });
+        </script>
+    </head>
+    <body onload="document.formulario.logim.focus(); " onkeydown="if ( event.keyCode == 13 ) validar();">
+        <div id="area">
+            <div id="corpo">
+                <form name="formulario" method="post" action="" id="formulario">
+                    <fieldset>
+                        <legend>Login</legend>
+                        <label class="logim">Login:
+                            <input type="text" name="logim" value="" id="logim" >
+                        </label>
+                        <label class="senha">Senha:
+                            <input type="password" name="senha" value="" id="senha" >
+                        </label>
+                        <label class="botao">
+                            <input type="button" name="btnLogin" id="btnLogin" value="LOGIN"  />
+                        </label>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
+<?php
+    if( $_GET['msg'] == "fail_login" ){
+        echo "<script>alert('Falha no Login, Tente Novamente!');</script>";
+    }
+    else if( $_GET['msg'] == "invasor" ){
+        echo "<script>alert('Você não tem permissão para acessar esta página!');</script>";
+    }
+    else if( $_GET['msg'] == "erro_file" ){
+        echo "<script>alert('Erro ao gravar os dados no arquivo de usuário!');</script>";
+    }
+    else if( $_GET['msg'] == "fail_banco" ){
+        echo "<script>alert('Erro ao acessar o banco de dados!');</script>";
+    }
+?>

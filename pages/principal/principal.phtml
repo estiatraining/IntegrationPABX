@@ -1,0 +1,94 @@
+<?php
+// put your code here
+    include_once $_SERVER[ 'DOCUMENT_ROOT' ]."/System/Utilitarios/Ambiente.php";
+    include_once $_SERVER[ 'DOCUMENT_ROOT' ]."/System/Utilitarios/LoadClass.class.php";
+    $__autoload = new LoadClass();
+    $__autoload->carregar('UsuarioNegocios');
+    $UsuarioNegocios = new UsuarioNegocios();
+    $UsuarioNegocios->invasor();
+    $UsuarioNegocios->getAmbiente();
+?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title></title>
+        <link rel="stylesheet" type="text/css" href="/System/CSS/principal.css" />
+        <link rel="stylesheet" type="text/css" href="/System/CSS/relatorio.css" />
+        <link rel="stylesheet" type="text/css" href="/System/CSS/uploadify.css" />
+        <script type="text/javascript" src="/System/JScript/jquery.js" ></script>
+        <script type="text/javascript" src="/System/JScript/swfobject.js" ></script>
+        <script type="text/javascript" src="/System/JScript/jquery.uploadify.js" ></script>
+        <script type="text/javascript" src="/System/JScript/jquery.maskedinput.js" ></script>
+        <script type="text/javascript" src="/System/JScript/geral.js" ></script>
+        <script type="text/javascript" src="/System/JScript/principal.js" ></script>
+        <script type="text/javascript" src="/System/JScript/ajax.js" ></script>
+        <script type="text/javascript">
+            $(document).ready( function() {
+                $('#mensagem').hide();
+                $('#gravandoDados').hide();
+                mostrar = function(){
+                    $('#mensagem').show(2000);
+                    $('#mensagem').hide(5000);
+                }
+                $("#arquivo").uploadify({
+                    'uploader'    : '/System/JScript/uploadify.swf',
+                    'script'      : '../../Negocios/upload.php',
+                    'folder'      : '/System/TMP',
+                    'cancelImg'   : '/System/IMG/cancel.png',
+                    'auto'        : true,
+                    'fileDesc'    : 'Clique aqui para enviar o seu arquivo!',
+                    'fileExt'            : '*.zip',
+                    'buttonText'  : 'UPLOAD',
+                    'queueID'     : 'fileQueue',
+                    'fileDataName': 'arquivo',
+                    onComplete    :function(a, b, c, d, e){
+                        alert("Enviado com Sucesso!");
+                        $('#relatorio').text('');
+                        selectBox('../../Facade/UploadFacade.php', c.type, c.name, '#relatorio');
+                        $('#gravandoDados').show();
+                    },
+                    onError       :function(a, b, c, d){
+                        alert(d.info + "\n" + d.type + "\n" + d.status + "\n" + d.text);
+                    }
+                });
+                $("#pesquisa").click( function(){
+                    selectBox('/System/pages/relatorio/relatorio.phtml', '', '', '#relatorio');
+                });
+                $("#logout").click(function(){
+                    location.href = '/System/index.phtml';
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <form name="formulario" action="#" method="post" enctype="multipart/form-data">
+            <div id="pagina">
+                <div id="topo">
+
+                </div>
+                <div id="corpo">
+                    <div id="fileQueue"></div>
+
+                    <label class="arquivo" onmouseover="" >
+                        <input type="file" name="arquivo" id="arquivo" />
+                    </label>
+                    <label class="pesquisa">
+                        <b><input type="button" name="pesquisa" id="pesquisa" value="PESQUISAR" title="Clique aqui para fazer uma pesquisa!" /></b>
+                    </label>
+                    <label class="logout">
+                        <b><input type="button" name="logout" id="logout" value="LOGOUT" onclick="" title="Clique aqui para sair do sistema!" /></b>
+                    </label>
+                    <div id="mensagem">Clique aqui para fazer o upload do arquivo!</div>
+                    <div id="gravandoDados">Aguarde, gravando dados do arquivo no banco...</div>
+                    <div id="relatorio">                        
+                    </div>
+                </div>
+            </div>
+        </form>
+    </body>
+</html>

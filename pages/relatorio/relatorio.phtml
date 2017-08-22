@@ -1,0 +1,179 @@
+<?php
+    include_once $_SERVER[ 'DOCUMENT_ROOT' ]."/System/Utilitarios/Ambiente.php";
+    include_once $_SERVER[ 'DOCUMENT_ROOT' ]."/System/Utilitarios/LoadClass.class.php";
+    $__autoload = new LoadClass();
+    $__autoload->carregar('Excecoes,UsuarioNegocios');
+    $UsuarioNegocios = new UsuarioNegocios();
+    $UsuarioNegocios->invasor();
+?>
+<script>
+    $(document).ready( function() {
+        $('#gravandoDados').hide();
+        $('#ramal').css('border','1px solid black');
+        //$.mask.definitions['~']='[+-]';
+        $("#dataIni").mask("99/99/9999");
+        $("#dataFim").mask("99/99/9999");
+        $("#timeIni").mask("99:99:99");
+        $("#timeFim").mask("99:99:99");
+        $("#timeLim").mask("99");
+        $("#ramal").mask("9999");
+        $("#dataIni").focus();
+        $("#geral").click( function(){
+            if(document.formulario.dataIni.value == ""){
+                alert("Digite a data inicial!");
+                $("#dataIni").focus();
+            }
+            else if(jQuery.trim(document.formulario.dataFim.value) == ""){
+                alert("Digite a data final!");
+                $("#dataFim").focus();
+            }
+            else if( ( !validaData(document.formulario.dataIni)) || ( !validaData(document.formulario.dataFim)) ){
+                alert('Data Invalida!');
+                $("#dataIni").value = "";
+                $("#dataFim").value = "";
+                $("#dataIni").focus();
+            }
+            else{
+                relatorio("../../Relatorios/geral.php?dI=" + document.formulario.dataIni.value + "&dF=" + document.formulario.dataFim.value + "&hI=" + document.formulario.timeIni.value + "&hF=" + document.formulario.timeFim.value + "&ramal=" + document.formulario.ramal.value + "&lim=" + document.formulario.timeLim.value + "&tipo=" + $("input[@name='tipo']:checked").val(), "GERAL", 'yes');
+            }
+        });
+        $("#geral").click( function(){
+            if(document.formulario.dataIni.value == ""){
+                alert("Digite a data inicial!");
+                $("#dataIni").focus();
+            }
+            else if(jQuery.trim(document.formulario.dataFim.value) == ""){
+                alert("Digite a data final!");
+                $("#dataFim").focus();
+            }
+            else if( ( !validaData(document.formulario.dataIni)) || ( !validaData(document.formulario.dataFim)) ){
+                alert('Data Invalida!');
+                $("#dataIni").value = "";
+                $("#dataFim").value = "";
+                $("#dataIni").focus();
+            }
+            else{
+                relatorio("../../Relatorios/geral.php?dI=" + document.formulario.dataIni.value + "&dF=" + document.formulario.dataFim.value + "&hI=" + document.formulario.timeIni.value + "&hF=" + document.formulario.timeFim.value + "&ramal=" + document.formulario.ramal.value + "&lim=" + document.formulario.timeLim.value + "&tipo=" + $("input[@name='tipo']:checked").val(), "GERAL", 'yes');
+            }
+        });
+        $("#excel").click( function(){
+            if(document.formulario.dataIni.value == ""){
+                alert("Digite a data inicial!");
+                $("#dataIni").focus();
+            }
+            else if(jQuery.trim(document.formulario.dataFim.value) == ""){
+                alert("Digite a data final!");
+                $("#dataFim").focus();
+            }
+            else if(jQuery.trim(document.formulario.timeIni.value) != "" && jQuery.trim(document.formulario.timeFim.value) == ""){
+                alert("Digite a hora final!");
+                $("#timeFim").focus();
+            }
+            else if( ( !validaData(document.formulario.dataIni)) || ( !validaData(document.formulario.dataFim)) ){
+                alert('Data Invalida!');
+                $("#dataIni").focus();
+            }
+            else if( $("input[@name='tipo']:checked").val() == 'NRR' && document.formulario.ramal.value == "" ){
+                alert('Escolha o Ramal!');
+                $("#ramal").focus();
+            }
+            else{
+                relatorio("../../Relatorios/excel.php?dI=" + document.formulario.dataIni.value + "&dF=" + document.formulario.dataFim.value + "&hI=" + document.formulario.timeIni.value + "&hF=" + document.formulario.timeFim.value + "&ramal=" + document.formulario.ramal.value + "&lim=" + document.formulario.timeLim.value + "&tipo=" + $("input[@name='tipo']:checked").val(), "GRAFICOS", 'yes');
+            }
+        });
+        $("#pdf").click( function(){
+            var i, tipo = document.formulario.tipo2, tipoChecked = "";
+            for( i = 0; i < tipo.length; i++ ){
+                if(tipo[i].checked)
+                    tipoChecked = tipo[i].value;
+            }
+            if(jQuery.trim(document.formulario.dataIni.value) == "" ){
+                alert("Digite a data inicial!");
+                $("#dataIni").focus();
+            }
+            else if(jQuery.trim(document.formulario.dataFim.value) == ""){
+                alert("Digite a data final!");
+                $("#dataFim").focus();
+            }
+            else if( ( !validaData(document.formulario.dataIni)) || ( !validaData(document.formulario.dataFim)) ){
+                alert('Data Invalida!');
+                $("#dataIni").focus();
+            }
+            else if(jQuery.trim(document.formulario.timeIni.value) != "" && jQuery.trim(document.formulario.timeFim.value) == ""){
+                alert("Digite a hora final!");
+                $("#timeFim").focus();
+            }
+            else if( ( tipoChecked == 'ANR' || tipoChecked == 'SIR' ) && document.formulario.ramal.value == "" ){
+                alert('Escolha o Ramal!');
+                $("#ramal").focus();
+            }
+            else{
+                relatorio("../../Relatorios/pdf.php?dI=" + document.formulario.dataIni.value + "&dF=" + document.formulario.dataFim.value + "&hI=" + document.formulario.timeIni.value + "&hF=" + document.formulario.timeFim.value + "&ramal=" + document.formulario.ramal.value + "&lim=" + document.formulario.timeLim.value + "&tipo=" + tipoChecked, "PDF", 'yes');
+            }
+        });
+    });
+</script>
+<fieldset id="fieldset">
+    <legend>Filtros de Pesquisa</legend>
+    <label class="dataIni">Data Inicial:
+        <input type="text" name="dataIni" value="" id="dataIni" maxlength="10" />
+    </label>
+    <label class="dataFim">Data Final:
+        <input type="text" name="dataFim" value="" id="dataFim" maxlength="10" />
+    </label>
+    <label class="timeIni">Tempo Inicial:
+        <input type="text" name="timeIni" value="" id="timeIni" maxlength="8" />
+    </label>
+    <label class="timeFim">Tempo Final:
+        <input type="text" name="timeFim" value="" id="timeFim" maxlength="8" />
+    </label>
+    <label class="ramal">Ramal:
+        <?php
+            //$RelatorioNegocios->comboRamal();
+        ?>
+        <input type="text" name="ramal" id="ramal" value="" maxlength="4" />
+    </label>
+    <label class="timeLim">Limite de tempo de Atendimento:
+        <input type="text" name="timeLim" value="" id="timeLim" maxlength="2" onkeyup="" />
+    </label>
+    <label class="pulaLinha"></label>
+    <fieldset id="tiposGraficos">
+        <legend>Tipos de Gráficos</legend>
+        <label>Número total de ligações recebidas:
+            <input type="radio" name="tipo" value="NTR" checked="checked" />
+        </label>
+        <label>Número total de ligações perdidas:
+            <input type="radio" name="tipo" value="NTP" />
+        </label>
+        <label>Total de ligações atendidas e perdidas por ramal:
+            <input type="radio" name="tipo" value="NRR" />
+        </label>
+    </fieldset>
+    <fieldset id="tiposGraficos2">
+        <legend>Tipos de Relatórios</legend>
+        <label>Analítico Completo:
+            <input type="radio" name="tipo2" value="ANC" checked="checked" />
+        </label>
+        <label>Sitético Completo:
+            <input type="radio" name="tipo2" value="SIC" />
+        </label>
+        <label>Analítico Ramal:
+            <input type="radio" name="tipo2" value="ANR" />
+        </label>
+        <label>Sitético Ramal:
+            <input type="radio" name="tipo2" value="SIR" />
+        </label>
+    </fieldset>
+    <label class="geral">
+        <input type="button" name="geral" value="REL. GERAL" id="geral" title="Clique aqui para gerar o relatório geral!" />
+    </label>
+    <label class="excel">
+        <input type="button" name="excel" value="Gerar Planilha Excel" id="excel" title="Clique aqui para gerar o relatório em Excel!" />
+    </label>
+    <label class="grafico">
+        <input type="button" name="grafico" value="GRÁFICOS" id="grafico" title="Clique aqui para gerar os gráficos!" />
+    </label>
+    <label class="pdf">
+        <input type="button" name="pdf" value="RELATÓRIOS" id="pdf" title="Clique aqui para gerar os relatórios pdf!" />
+    </label>
+</fieldset>
